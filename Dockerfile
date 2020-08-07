@@ -32,4 +32,4 @@ EXPOSE 6567 6567/udp \
     6859 6859/udp
 
 
-CMD java -jar server.jar config startCommands config name ${NAME},config desc $DESCRIPTION,config motd ${MESSAGE_OF_THE_DAY0},config showConnectMessages ${SHOW_CONNECT_MESSAGES},config antiSpam ${ANTI_SPAM},config enableVotekick ${ENABLE_VOTEKICK},config autoUpdate ${AUTO_UPDATE},config socketInput ${SOCKET_INPUT},config socketInputAddress ${SOCKET_INPUT_ADDRESS},difficulty ${DIFFICULTY},playerlimit ${PLAYERLIMIT},shuffle ${SHUFFLE},host ${MAP} ${GAMEMODE}
+CMD java -jar server.jar config startCommands config name ${NAME},config desc $DESCRIPTION,config motd ${MESSAGE_OF_THE_DAY},config showConnectMessages ${SHOW_CONNECT_MESSAGES},config antiSpam ${ANTI_SPAM},config enableVotekick ${ENABLE_VOTEKICK},config autoUpdate ${AUTO_UPDATE},config socketInput ${SOCKET_INPUT},config socketInputAddress ${SOCKET_INPUT_ADDRESS},difficulty ${DIFFICULTY},playerlimit ${PLAYERLIMIT},shuffle ${SHUFFLE},host ${MAP} ${GAMEMODE}
