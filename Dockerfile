@@ -1,4 +1,5 @@
-FROM openjdk:8-jre-alpine
+ARG ARCH=
+FROM ${ARCH}openjdk:8-jre-alpine
 
 RUN adduser --disabled-password --uid 1000 mindustry
 
