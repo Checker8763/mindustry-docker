@@ -1,14 +1,22 @@
-ARG ARCH=
-FROM ${ARCH}openjdk:8-jre-alpine
 
+FROM openjdk:8-jre-alpine
+
+# For constant fileowner uuid
+# Needed so there is no mismatch in rights when adding sftp container
 RUN adduser --disabled-password --uid 1000 mindustry
 
+# Actually running everything following as this user
 USER mindustry
 
 # Mindustrys folder
 WORKDIR /home/mindustry
-RUN wget https://github.com/Anuken/Mindustry/releases/latest/download/server-release.jar -O server.jar
 
+# Since they added beta versions to the releases latest isn' always for the stable version
+# Latest stable version: 104.6
+# ADD https://github.com/Anuken/Mindustry/releases/latest/download/server-release.jar .
+ADD --chown=mindustry https://github.com/Anuken/Mindustry/releases/download/v104.6/server-release.jar .
+
+# Make the Server as customizable as possible
 ENV MAP=fortress \
     GAMEMODE=survival \
     DIFFICULTY=normal \
@@ -16,7 +24,7 @@ ENV MAP=fortress \
     SHUFFLE=none \
     # Config
     NAME=Server \
-    DESCRIPTION="Containered Mindustry Server by checker8763/minustry" \
+    DESCRIPTION="Containered Mindustry Server by checker8763/mindustry" \
     MESSAGE_OF_THE_DAY=off \
     SHOW_CONNECT_MESSAGES=true \
     ANTI_SPAM=true \
@@ -32,4 +40,4 @@ EXPOSE 6567 6567/udp \
     6859 6859/udp
 
 
-CMD java -jar server.jar config startCommands config name ${NAME},config desc $DESCRIPTION,config motd ${MESSAGE_OF_THE_DAY},config showConnectMessages ${SHOW_CONNECT_MESSAGES},config antiSpam ${ANTI_SPAM},config enableVotekick ${ENABLE_VOTEKICK},config autoUpdate ${AUTO_UPDATE},config socketInput ${SOCKET_INPUT},config socketInputAddress ${SOCKET_INPUT_ADDRESS},difficulty ${DIFFICULTY},playerlimit ${PLAYERLIMIT},shuffle ${SHUFFLE},host ${MAP} ${GAMEMODE}
+CMD java -jar server-release.jar config startCommands config name ${NAME},config desc $DESCRIPTION,config motd ${MESSAGE_OF_THE_DAY},config showConnectMessages ${SHOW_CONNECT_MESSAGES},config antiSpam ${ANTI_SPAM},config enableVotekick ${ENABLE_VOTEKICK},config autoUpdate ${AUTO_UPDATE},config socketInput ${SOCKET_INPUT},config socketInputAddress ${SOCKET_INPUT_ADDRESS},difficulty ${DIFFICULTY},playerlimit ${PLAYERLIMIT},shuffle ${SHUFFLE},host ${MAP} ${GAMEMODE}
