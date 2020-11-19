@@ -1,5 +1,5 @@
-
-FROM openjdk:8-jre-alpine
+ARG ARCH=
+FROM ${ARCH}openjdk:8-jre-alpine
 
 # For constant fileowner uuid
 # Needed so there is no mismatch in rights when adding sftp container
