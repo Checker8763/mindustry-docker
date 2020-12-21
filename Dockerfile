@@ -14,7 +14,7 @@ WORKDIR /home/mindustry
 # Since they added beta versions to the releases latest isn' always for the stable version
 # Latest stable version: 104.6
 # ADD https://github.com/Anuken/Mindustry/releases/latest/download/server-release.jar .
-ADD --chown=mindustry https://github.com/Anuken/Mindustry/releases/download/v121.3/server-release.jar .
+ADD --chown=mindustry https://github.com/Anuken/Mindustry/releases/download/v121.4/server-release.jar .
 
 # Make the Server as customizable as possible
 ENV MAP=fortress \
