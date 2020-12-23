@@ -11,10 +11,13 @@ USER mindustry
 # Mindustrys folder
 WORKDIR /home/mindustry
 
-# Since they added beta versions to the releases latest isn' always for the stable version
-# Latest stable version: 104.6
-# ADD https://github.com/Anuken/Mindustry/releases/latest/download/server-release.jar .
-ADD --chown=mindustry https://github.com/Anuken/Mindustry/releases/download/v121.4/server-release.jar .
+# Expose Ports both tcp and Udp
+# For the Server
+EXPOSE 6567 6567/udp \
+    6567 6567/tcp \
+# For the Socket Input
+    6859 6859/udp \
+    6859 6859/tcp
 
 # Make the Server as customizable as possible
 ENV MAP=fortress \
@@ -29,15 +32,20 @@ ENV MAP=fortress \
     SHOW_CONNECT_MESSAGES=true \
     ANTI_SPAM=true \
     ENABLE_VOTEKICK=true \
-    AUTO_UPDATE=true \
+    ALLOW_CUSTOM_CLIENTS=false \
+    AUTO_UPDATE=false \
+    AUTOSAVE=false \
+    AUTOSAVE_AMOUNT=10 \
+    AUTOSAVE_SPACING=300 \
     SOCKET_INPUT=false \
-    SOCKET_INPUT_ADDRESS=0.0.0.0
+    SOCKET_INPUT_ADDRESS=0.0.0.0 \
+    # Additional Config
+    #has to end on a comma so the
+    ADDITIONAL_CONFIG=""
 
-# Expose Ports both tcp and Udp
-# For the Server
-EXPOSE 6567 6567/udp \
-# For the Socket Input
-    6859 6859/udp
+# Since they added beta versions to the releases latest isn' always for the stable version
+# Latest stable version: 121.4
+# ADD https://github.com/Anuken/Mindustry/releases/latest/download/server-release.jar .
+ADD --chown=mindustry https://github.com/Anuken/Mindustry/releases/download/v121.4/server-release.jar .
 
-
-CMD java -jar server-release.jar config startCommands config name ${NAME},config desc $DESCRIPTION,config motd ${MESSAGE_OF_THE_DAY},config showConnectMessages ${SHOW_CONNECT_MESSAGES},config antiSpam ${ANTI_SPAM},config enableVotekick ${ENABLE_VOTEKICK},config autoUpdate ${AUTO_UPDATE},config socketInput ${SOCKET_INPUT},config socketInputAddress ${SOCKET_INPUT_ADDRESS},difficulty ${DIFFICULTY},playerlimit ${PLAYERLIMIT},shuffle ${SHUFFLE},host ${MAP} ${GAMEMODE}
+CMD java -jar server-release.jar ${ADDITIONAL_CONFIG},config name ${NAME},config desc $DESCRIPTION,config motd ${MESSAGE_OF_THE_DAY},config showConnectMessages ${SHOW_CONNECT_MESSAGES},config antiSpam ${ANTI_SPAM},config enableVotekick ${ENABLE_VOTEKICK},config autoUpdate ${AUTO_UPDATE},config autosave ${AUTOSAVE},config autosaveAmount ${AUTOSAVE_AMOUNT},config autosaveSpacing ${AUTOSAVE_SPACING},config socketInput ${SOCKET_INPUT},config socketInputAddress ${SOCKET_INPUT_ADDRESS},playerlimit ${PLAYERLIMIT},shuffle ${SHUFFLE},host ${MAP} ${GAMEMODE}
