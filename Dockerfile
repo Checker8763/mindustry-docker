@@ -38,11 +38,12 @@ ENV MAP=fortress \
     AUTOSAVE_AMOUNT=10 \
     AUTOSAVE_SPACING=300 \
     SOCKET_INPUT=false \
-    SOCKET_INPUT_ADDRESS=0.0.0.0 \
+    SOCKET_INPUT_ADDRESS=0.0.0.0
 
+# Set the Version
+ARG VERSION=122.1
 # Since they added beta versions to the releases latest isn' always for the stable version
-# Latest stable version: 121.4
 # ADD https://github.com/Anuken/Mindustry/releases/latest/download/server-release.jar .
-ADD --chown=mindustry https://github.com/Anuken/Mindustry/releases/download/v121.4/server-release.jar .
+ADD --chown=mindustry https://github.com/Anuken/Mindustry/releases/download/v${VERSION}/server-release.jar .
 
 CMD java -jar server-release.jar config name ${NAME},config desc $DESCRIPTION,config motd ${MESSAGE_OF_THE_DAY},config showConnectMessages ${SHOW_CONNECT_MESSAGES},config antiSpam ${ANTI_SPAM},config enableVotekick ${ENABLE_VOTEKICK},config autoUpdate ${AUTO_UPDATE},config autosave ${AUTOSAVE},config autosaveAmount ${AUTOSAVE_AMOUNT},config autosaveSpacing ${AUTOSAVE_SPACING},config socketInput ${SOCKET_INPUT},config socketInputAddress ${SOCKET_INPUT_ADDRESS},playerlimit ${PLAYERLIMIT},shuffle ${SHUFFLE},host ${MAP} ${GAMEMODE}
