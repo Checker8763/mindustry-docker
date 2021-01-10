@@ -14,10 +14,8 @@ WORKDIR /home/mindustry
 # Expose Ports both tcp and Udp
 # For the Server
 EXPOSE 6567 6567/udp \
-    6567 6567/tcp \
 # For the Socket Input
-    6859 6859/udp \
-    6859 6859/tcp
+    6859 6859/udp 
 
 # Make the Server as customizable as possible
 ENV MAP=fortress \
