@@ -39,7 +39,7 @@ ENV MAP=fortress \
     SOCKET_INPUT_ADDRESS=0.0.0.0
 
 # Set the Version
-ARG VERSION=123.1
+ARG VERSION=126.1
 # Since they added beta versions to the releases latest isn' always for the stable version
 # ADD https://github.com/Anuken/Mindustry/releases/latest/download/server-release.jar .
 ADD --chown=mindustry https://github.com/Anuken/Mindustry/releases/download/v${VERSION}/server-release.jar .
